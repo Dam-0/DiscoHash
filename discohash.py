@@ -29,12 +29,12 @@ class discohash(plugins.Plugin):
         global tether
         tether = False
         logging.info(f"[*] DiscoHash plugin loaded")
-    
-
-    # called when internet is available
-    def on_internet_available(self, agent):
-        global tether
-        tether = True
+        hostname = "google.com" 
+        response = os.system("ping -c 1 " + hostname)  
+        if response == 0:   
+            tether = True
+        else:
+            tether = False
 
 
     # called when an epoch is over (where an epoch is a single loop of the main algorithm)
@@ -148,10 +148,6 @@ class discohash(plugins.Plugin):
                             'inline': False
                         },
                     ],
-                    'footer': {
-                        'text': 'Pwnagotchi v1.5.5 - DiscoHash Plugin v{} \
-                        \nAuthors PwnMail: f033aa5cd581f67ac5f88838de002fc240aadc74ee2025b0135e5fff4e4b5a4a'.format(self.__version__)
-                    }
                     }
                 ]
             }
